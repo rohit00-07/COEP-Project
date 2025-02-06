@@ -51,7 +51,7 @@ def ask_question(context, question):
     except Exception as e:
         return f"An error occurred: {e}"
 
-# Streamlit UI
+
 st.title("PDF Summarizer and Question Answering")
 image = Image.open('logo-strip.png')
 st.image(image, use_container_width='always')
@@ -62,7 +62,7 @@ if uploaded_file is not None:
     pdf_text = extract_text_from_pdf(uploaded_file)
     
     st.subheader("Text Extracted from PDF:")
-    st.write(pdf_text[:500])  # Display a snippet of the text for review
+    st.write(pdf_text[:500])  
 
     summary_button = st.button("Summarize Text")
     if summary_button:
