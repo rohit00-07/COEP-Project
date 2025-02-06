@@ -4,7 +4,7 @@ from groq import Groq
 from PIL import Image
 
 
-client = Groq(api_key='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')
+client = Groq(api_key='')
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
