@@ -7,7 +7,7 @@ from PIL import Image
 client = Groq(api_key='')
 
 def extract_text_from_pdf(pdf_path):
-    doc = fitz.open(pdf_path)
+    doc = fitz.open(stream=pdf_path.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
@@ -53,8 +53,8 @@ def ask_question(context, question):
 
 
 st.title("PDF Summarizer and Question Answering")
-image = Image.open('logo-strip.png')
-st.image(image, use_container_width='always')
+image = Image.open('1.jpeg')
+st.image(image, use_container_width=True, width=800)
 
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
@@ -64,14 +64,15 @@ if uploaded_file is not None:
     st.subheader("Text Extracted from PDF:")
     st.write(pdf_text[:500])  
 
-    summary_button = st.button("Summarize Text")
-    if summary_button:
-        summary = summarize_text(pdf_text)
+    if st.button("Summarize Text"):
+        with st.spinner('Summarizing...'):
+            summary = summarize_text(pdf_text)
         st.subheader("Summary:")
         st.write(summary)
 
     question = st.text_input("Ask a question about the PDF:")
     if question:
-        answer = ask_question(pdf_text, question)
+        with st.spinner('Getting the answer...'):
+            answer = ask_question(pdf_text, question)
         st.subheader("Answer:")
         st.write(answer)
