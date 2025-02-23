@@ -5,7 +5,7 @@ from PIL import Image
 import concurrent.futures
 
 # Initialize Groq client (ensure API key is set)
-client = Groq(api_key='')
+client = Groq(api_key='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')
 
 # Set Streamlit page config
 st.set_page_config(page_title="PDF Summarizer & QA", layout="wide", page_icon="📄")
